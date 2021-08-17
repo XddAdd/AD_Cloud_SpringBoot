@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.add.filecloud.dao.FileFolderDao">
+
+    <select id="querySonFileFoldersById" parameterType="java.lang.Integer" resultType="com.add.filecloud.pojo.FileFolder">
+        SELECT *
+        FROM my_file_folder
+        WHERE parent_folder_id = #{fileFolderId}
+    </select>
+
+    <select id="queryFileFolderById" parameterType="java.lang.Integer" resultType="com.add.filecloud.pojo.FileFolder">
+        SELECT *
+        FROM my_file_folder
+        WHERE id = #{folderId}
+    </select>
+
+    <insert id="insertFileFolder" useGeneratedKeys="true" keyProperty="id"
+            keyColumn="id" parameterType="com.add.filecloud.pojo.FileFolder">
+        insert into
+        my_file_folder(file_folder_name, parent_folder_id, file_folder_path, file_storehouse_id)
+        values
+        (#{fileFolderName}, #{parentFolderId}, #{fileFolderPath}, #{fileStorehouseId})
+    </insert>
+
+
+</mapper>

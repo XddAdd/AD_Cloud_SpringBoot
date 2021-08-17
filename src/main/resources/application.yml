@@ -1,0 +1,42 @@
+server:
+  port: 8080
+  servlet:
+    context-path: "/file_cloud"
+
+#项目相关
+file_root_path: D:/myFtp/
+
+
+
+#jdbc
+jdbc:
+  driver: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://localhost:3306/cloud?useUnicode=true&serverTimezone=UTC&characterEncoding=utf-8
+  username: root
+  password: root
+
+#Mybatis
+mybatis_config_file_path: mybatis-config.xml
+mapper_path: /mapper/**.xml
+entity_package: com.add.filecloud.pojo
+
+
+
+#mvc和json
+spring:
+  resources:
+    static-locations: "classpath:/static/,classpath:/public/"
+  mvc:
+    format:
+      date: yyyy-MM-dd HH:mm:ss
+  jackson:
+    serialization:
+      indent-output: true
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: non_null
+  # 指定外部web资源文件夹：访问的路径为/
+  web:
+    resources:
+      static-locations: classpath:/static/,classpath:/public/,file:${user.head.local-path}
+

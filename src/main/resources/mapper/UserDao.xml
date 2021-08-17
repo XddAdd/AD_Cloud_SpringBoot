@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.add.filecloud.dao.UserDao">
+
+    <select id="queryByUsername" resultType="com.add.filecloud.pojo.User">
+        select *
+        from user
+        where username = #{username}
+    </select>
+
+
+    <select id="getIdByUsername" resultType="java.lang.Integer">
+        select id
+        from user
+        where username=#{username}
+    </select>
+
+    
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id"
+            keyColumn="id" parameterType="com.add.filecloud.pojo.User">
+        insert into
+        user(username, password, nickname, birthday,
+        sex, image_Path)
+        values
+        (#{username}, #{password}, #{nickname}, #{birthday}, #{sex}, #{imagePath})
+    </insert>
+
+    <update id="updateUser" parameterType="com.add.filecloud.pojo.User">
+        update user
+        <set>
+            <if test="username != null">username=#{username},</if>
+            <if test="password != null">password=#{password},</if>
+            <if test="fileStorehouseId != null">file_storehouse_id=#{fileStorehouseId}</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="deleteUser">
+        delete
+        from user
+        where id = #{id}
+    </delete>
+
+</mapper>
